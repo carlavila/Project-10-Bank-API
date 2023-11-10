@@ -1,6 +1,5 @@
 import React from 'react'
 import Feature from '../components/Feature'
-
 import iconChat from '../assets/icon-chat.png'
 import iconMoney from '../assets/icon-money.png'
 import iconSecurity from '../assets/icon-security.png'
