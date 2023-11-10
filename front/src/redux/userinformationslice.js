@@ -16,9 +16,9 @@ const userInformationSlice = createSlice({
             state.userData = action.payload.body;
         },
         editUserNameInformation: (state, action) => {
-            state.userData.userName = action.payload
+            state.userData.userName = action.payload;
         }
-    },
+    },    
 },)
 
 

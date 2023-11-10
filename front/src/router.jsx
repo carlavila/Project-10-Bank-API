@@ -11,13 +11,13 @@ import React from 'react'
 export default function Router() {
   const isConnected = useSelector ((state) => state.authentification.isConnected)
   return (
-    <div>
+    <div> 
         <Navbar />
             <Routes>
                 <Route path="/" element={<Home/>} />
-                <Route path="/signin" element={<SignIn/>} />
+                <Route path="/login" element={<SignIn/>} />
                 {/* Renvoyé l'utilisateur sur la page signin s'il n'est pas connecté */}
-                <Route path="/user" element={isConnected ? <Profile/> : <Navigate to="/signin"/>} />
+                <Route path="/user" element={isConnected ? <Profile/> : <Navigate to="/login"/>} />
 
             </Routes>
         <Footer />

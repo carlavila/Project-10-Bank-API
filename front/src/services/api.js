@@ -57,13 +57,13 @@ export async function editProfile(token, newFirstName, newLastName) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      firstname: newFirstName,
-      lastname: newLastName
+      firstName: newFirstName,
+      lastName: newLastName,
     }),
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Erreur lors de la mise à jour du nom de l'user name");
+        throw new Error("Erreur lors de la mise à jour du nom de l'utilisateur");
       }
       return response.json();
     })
@@ -74,3 +74,5 @@ export async function editProfile(token, newFirstName, newLastName) {
       throw new Error("Une erreur s'est produite : " + error.message);
     });
 }
+
+
