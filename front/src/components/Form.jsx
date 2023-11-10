@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { signIn } from "../redux/authentificationslice";
 import { useDispatch } from "react-redux";
+import { TextInput, PasswordInput } from "./Inputs";
+import { signIn } from "../redux/authentificationslice";
 import { loginUser } from "../services/api";
-import { AiFillWarning } from "react-icons/ai";
 
 export default function Form() {
   const {
@@ -53,34 +53,8 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="input-wrapper">
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          id="email"
-          {...register("email", { required: "Email non valide" })}
-        />
-        {errors.email && (
-          <div className="error-msg">
-            <AiFillWarning className="logo-error" />
-            <p className="error-message">{errors.email.message}</p>
-          </div>
-        )}
-      </div>
-      <div className="input-wrapper">
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          {...register("password", { required: "Mot de passe non valide" })}
-        />
-        {errors.password && (
-          <div className="error-msg">
-            <AiFillWarning className="logo-error" />
-            <p className="error-message">{errors.password.message}</p>
-          </div>
-        )}
-      </div>
+      <TextInput id="email" label="Email" register={register} errors={errors} />
+      <PasswordInput id="password" label="Password" register={register} errors={errors} />
       <div className="input-remember">
         <input type="checkbox" id="rememberMe" {...register("rememberMe")} />
         <label htmlFor="rememberMe">Remember me</label>
