@@ -330,3 +330,24 @@ input {
   padding-top: 2em;
   padding-bottom: 2em;
 }
+
+@media (max-width: 720px) {
+  .modify {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin:0 auto;
+  }
+  .input-wrapper-modify {
+    margin-bottom: 1rem;
+    padding: 5px;
+    width: 100%;
+    font-size: 1.2rem;
+    margin-left: 2em;
+    margin-right: 2em; 
+}
+.form-btn-container {
+  margin-top: 1em;
+}
+
+}
