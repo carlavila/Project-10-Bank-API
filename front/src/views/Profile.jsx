@@ -28,9 +28,11 @@ export default function UserCount() {
     // Appele de la fonction fetchData pour récupérer les données
     callUserProfile();
   }, [dispatch, token]);
+  
 
   return (
-    <div className="main user-bg-dark">
+    <div className="margin">
+    <main className="main bg-dark">
       <EditButton />
 
       <h2 className="sr-only">Accounts</h2>
@@ -50,6 +52,7 @@ export default function UserCount() {
         amount="$184.30"
         amountText="Current Balance"
       />
+    </main>
     </div>
   );
 }

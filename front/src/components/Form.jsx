@@ -34,7 +34,7 @@ export default function Form() {
       const token = await loginUser(email, password);
       dispatch(signIn(token));
 
-      localStorage.setItem("token", token);
+      
 
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", email);
