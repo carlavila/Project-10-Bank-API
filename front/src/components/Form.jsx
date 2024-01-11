@@ -16,37 +16,15 @@ export default function Form() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const rememberedEmail = localStorage.getItem("rememberedEmail");
-    const rememberedPassword = localStorage.getItem("rememberedPassword");
-
-    if (rememberedEmail && rememberedPassword) {
-      setValue("email", rememberedEmail);
-      setValue("password", rememberedPassword);
-      setValue("rememberMe", true);
-    }
-  }, [setValue]);
-
   const onSubmit = async (data) => {
-    const { email, password, rememberMe } = data;
+    const { email, password } = data;
 
     try {
       const token = await loginUser(email, password);
       dispatch(signIn(token));
-
-      
-
-      if (rememberMe) {
-        localStorage.setItem("rememberedEmail", email);
-        localStorage.setItem("rememberedPassword", password);
-      } else {
-        localStorage.removeItem("rememberedEmail");
-        localStorage.removeItem("rememberedPassword");
-      }
-
-      navigate("/user");
+      navigate('/user');
     } catch (error) {
-      console.error("Une erreur s'est produite :", error);
+      console.error('Une erreur s\'est produite :', error);
       // Gérer l'erreur ici
     }
   };
