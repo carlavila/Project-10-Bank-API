@@ -10,13 +10,14 @@ export default function EditButton() {
 
   const [newFirstName, setNewFirstName] = useState(userInfo.firstName);
   const [newLastName, setNewLastName] = useState(userInfo.lastName);
-
   const [editOn, setEditOn] = useState(false);
+  const [error, setError] = useState('');
 
   const displayEditForm = () => {
     setEditOn(true);
     setNewFirstName(userInfo.firstName);
     setNewLastName(userInfo.lastName);
+    setError('');
   };
 
   const closeEditForm = () => {
@@ -26,14 +27,13 @@ export default function EditButton() {
   const handleEditUserName = async (e) => {
     e.preventDefault();
 
-    try {
-      const updatedUserInfo = await editProfile(
-        token,
-        newFirstName,
-        newLastName
-      );
+    if (!newFirstName.trim()) {
+      setError('Veuillez renseigner un prénom valide');
+      return;
+    }
 
-      // Assuming the server returns the updated user information
+    try {
+      const updatedUserInfo = await editProfile(token, newFirstName, newLastName);
       const mergedUserInfo = {
         ...userInfo,
         ...updatedUserInfo,
@@ -45,10 +45,7 @@ export default function EditButton() {
       dispatch(editUserNameInformation(mergedUserInfo.userName));
       setEditOn(false);
     } catch (error) {
-      console.error(
-        "Erreur lors de la mise à jour du nom d'utilisateur :",
-        error
-      );
+      console.error('Erreur lors de la mise à jour du nom d\'utilisateur :', error);
     }
   };
 
@@ -66,7 +63,10 @@ export default function EditButton() {
                     type="text"
                     id="firstName"
                     value={newFirstName}
-                    onChange={(e) => setNewFirstName(e.target.value)}
+                    onChange={(e) => {
+                      setNewFirstName(e.target.value);
+                      setError('');
+                    }}
                   />
                 </div>
                 <div className="input-remember">
@@ -79,9 +79,14 @@ export default function EditButton() {
                   />
                 </div>
               </div>
+              {error && <p className="error-message">{error}</p>}
               <div className="form-btn-container">
-                <button className="button" type="submit">Save</button>
-                <button className="button" onClick={closeEditForm}>Cancel</button>
+                <button className="button" type="submit" disabled={!!error}>
+                  Save
+                </button>
+                <button className="button" onClick={closeEditForm}>
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
@@ -91,7 +96,7 @@ export default function EditButton() {
           <h1>
             Welcome back
             <br />
-            {userInfo ? `${userInfo.firstName} ${userInfo.lastName}` : ""} !
+            {userInfo ? `${userInfo.firstName} ${userInfo.lastName}` : ''} !
           </h1>
           <button className="edit-button" onClick={displayEditForm}>
             Edit Name
